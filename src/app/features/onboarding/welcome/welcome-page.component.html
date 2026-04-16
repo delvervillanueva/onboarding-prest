@@ -1,0 +1,77 @@
+<main class="welcome">
+  <header class="welcome__header" [attr.aria-label]="ariaHeader()">
+    <img
+      class="welcome__logo"
+      src="/assets/images/welcome/LogoSantander.svg"
+      [attr.alt]="ariaHeader()"
+      loading="eager"
+      decoding="async"
+    />
+  </header>
+
+  <section class="welcome__hero" [attr.aria-label]="ariaHero()">
+    <div class="welcome__illustration" aria-hidden="true">
+      <img
+        class="welcome__illustration-image"
+        src="/assets/images/welcome/Invite%20Friend.svg"
+        alt=""
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+
+    <h1 class="welcome__title">
+      {{ titleLine1() }}<br />
+      {{ titleLine2() }}<br />
+      <span class="welcome__title-accent">{{ titleAccent() }}</span>
+    </h1>
+
+    <ul class="welcome__bullets" [attr.aria-label]="ariaRequirements()">
+      <li class="welcome__bullet">
+        <img
+          class="welcome__bullet-icon"
+          src="/assets/images/welcome/CA225-emoji-very-happy.svg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="welcome__bullet-text">{{ bulletDni() }}</span>
+      </li>
+      <li class="welcome__bullet">
+        <img
+          class="welcome__bullet-icon"
+          src="/assets/images/welcome/AC080-solidarity-rounding.svg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="welcome__bullet-text">{{ bulletClients() }}</span>
+      </li>
+    </ul>
+
+    <div class="welcome__info" role="note" [attr.aria-label]="ariaRecommendation()">
+      <img
+        class="welcome__info-icon"
+        src="/assets/images/welcome/Info%20icon.svg"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
+      <p class="welcome__info-text">{{ infoText() }} <strong>{{ infoStrong() }}</strong></p>
+    </div>
+  </section>
+
+  <footer class="welcome__footer">
+    <std-button
+      class="welcome__cta"
+      type="primary"
+      size="l"
+      [attr.label]="ctaStart()"
+      (clickEvent)="start()"
+    ></std-button>
+  </footer>
+</main>
+

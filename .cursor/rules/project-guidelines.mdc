@@ -1,0 +1,424 @@
+---
+description: Global project guidelines for the banking onboarding microfrontend
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Project Guidelines - Banking Onboarding Microfrontend
+
+## 1. Project context
+
+This project is the **first microfrontend** of a banking loan ecosystem.
+
+Its responsibility is strictly limited to the **onboarding process**, including:
+- user identification
+- data capture
+- validation
+- qualification
+- onboarding result handling
+
+This microfrontend **does not own the full loan lifecycle**.
+
+It must:
+- guide users through onboarding
+- validate inputs
+- orchestrate onboarding flow
+- return a result or redirect to the next system
+
+---
+
+## 2. Product vision
+
+This microfrontend represents the **loan onboarding journey only**.
+
+It is responsible for:
+- welcome experience
+- initial data capture
+- OTP validation (if required)
+- qualification result
+
+It must NOT handle:
+- loan execution
+- loan management
+- disbursement
+- repayments
+
+---
+
+## 3. Microfrontend boundaries
+
+### Scope rules
+- Only onboarding-related features must exist here.
+- Do not include full loan lifecycle features.
+- Keep logic focused on onboarding only.
+- Do not assume ownership of downstream flows.
+
+### Integration rules
+- This microfrontend must be able to:
+  - hand off navigation
+  - expose onboarding results
+  - integrate with external systems
+- Avoid tight coupling with other microfrontends.
+
+---
+
+## 4. UI/UX principles
+
+### Responsive design
+- Fully responsive (mobile-first).
+- Must work on mobile, tablet, and desktop.
+- Use Flexbox and Grid.
+- Avoid fixed layouts unless strictly necessary.
+
+### UX expectations
+- Guided flow
+- Clear steps
+- Minimal friction
+- Strong validation feedback
+- Professional banking UI tone
+
+### Accessibility
+- Semantic HTML
+- Proper labels
+- Keyboard navigation
+- Good contrast
+- Appropriate aria attributes when needed
+
+---
+
+## 5. Design system integration
+
+This project uses:
+
+- `stencil-library-0.1.47.tgz`
+
+### Rules
+- ALWAYS use design system components first.
+- Avoid recreating components already provided by the design system.
+- Create wrappers only when needed for Angular integration.
+- Respect Shadow DOM behavior.
+- Do not override styles aggressively.
+- Keep custom wrappers small, reusable, and focused.
+
+---
+
+## 6. Styling methodology (BEM)
+
+BEM is mandatory.
+
+### Structure
+- Block: `onboarding-form`
+- Element: `onboarding-form__field`
+- Modifier: `onboarding-form__field--error`
+
+### Rules
+- Use SCSS.
+- No vague names such as `box`, `item`, `content`, `container`.
+- No excessive nesting.
+- No `!important` unless strictly necessary.
+- Keep styles component-scoped whenever possible.
+- Custom styles must coexist safely with the design system.
+
+---
+
+## 7. Angular architecture
+
+### Angular version
+This microfrontend must target **Angular 20**.
+
+### Approach
+- Prefer standalone components, standalone directives, and standalone pipes.
+- Use Angular 20 patterns and APIs when appropriate.
+- Prefer strongly typed implementations.
+- Prefer feature-based architecture.
+- Keep the implementation aligned with modern Angular best practices.
+
+### Architecture rules
+- Avoid legacy Angular patterns unless strictly necessary.
+- Do not use NgModules unless a third-party integration explicitly requires them.
+- Prefer functional guards, functional interceptors, and modern provider configuration.
+- Use clear separation between `core`, `features`, and `shared`.
+
+### Structure
+
+- `core`
+- `features/onboarding`
+- `shared`
+
+### Onboarding structure
+
+- `welcome`
+- `initial-data`
+- `otp-validation`
+- `offer-result`
+- `no-lead-result`
+- `pep-facta-result`
+
+---
+
+## 8. Reactive architecture
+
+### Rules
+- Use Reactive Forms (mandatory).
+- Prefer typed forms.
+- Use RxJS for async flows and service orchestration.
+- Use Angular signals for local UI state, derived state, and step state when appropriate.
+- Prefer declarative patterns over manual mutation.
+- Prefer `computed` and `effect` only when they improve clarity and maintainability.
+
+### Avoid
+- `ngModel`
+- imperative-heavy code
+- nested subscriptions
+- unnecessary Subjects for local state when signals are enough
+- legacy state patterns when a simpler Angular 20 approach is clearer
+
+---
+
+## 8.1 Modern Angular 20 practices
+
+- Prefer `input()`, `output()`, and `model()` APIs when they improve clarity.
+- Prefer `inject()` over constructor injection when it keeps the component or service cleaner.
+- Prefer `ChangeDetectionStrategy.OnPush` for components unless there is a justified reason not to.
+- Prefer modern Angular template control flow syntax when appropriate.
+- Prefer route providers and application-wide providers using modern bootstrap configuration.
+- Prefer strongly typed APIs and avoid weak typing.
+- Keep compatibility with the banking design system and microfrontend integration requirements.
+
+---
+
+## 9. Clean Code
+
+- Use meaningful names.
+- Keep functions small and focused.
+- One responsibility per function or class.
+- Avoid duplication.
+- Prefer clarity over cleverness.
+- Keep code readable, testable, and maintainable.
+
+---
+
+## 10. SOLID
+
+Apply pragmatically:
+
+- Single Responsibility
+- Open/Closed
+- Interface Segregation
+- Dependency Inversion
+
+Avoid overengineering.
+
+---
+
+## 11. Component rules
+
+- One responsibility per component.
+- Keep components small.
+- Extract reusable parts when appropriate.
+- Prefer standalone components.
+- Prefer `ChangeDetectionStrategy.OnPush`.
+- Prefer signals for local component state when appropriate.
+- Prefer `inject()` for dependencies when it improves readability.
+- Keep component structure clear:
+  - injections
+  - readonly state
+  - form
+  - lifecycle hooks
+  - public methods
+  - private helper methods
+
+---
+
+## 12. Service rules
+
+- Domain-oriented services.
+- No mixed responsibilities.
+- Typed APIs.
+- No secrets in frontend.
+- Keep integration concerns isolated.
+- Avoid embedding business orchestration directly in components.
+
+---
+
+## 13. Forms rules
+
+- Reactive Forms only.
+- Typed controls preferred.
+- Clear validations.
+- User-friendly errors.
+- Mobile-friendly inputs.
+- Keep validation logic explicit and reusable.
+- Numeric-only fields should support mobile numeric keyboard behavior when applicable.
+
+---
+
+## 14. Naming conventions
+
+Code must be in English.
+
+Examples:
+
+- `welcome-page.component.ts`
+- `initial-data-form.component.ts`
+- `otp-validation.component.ts`
+- `onboarding-state.service.ts`
+
+Avoid Spanish names in code.
+
+UI text may remain in Spanish if required by business.
+
+---
+
+## 15. Performance
+
+- Avoid duplicated requests.
+- Lazy load features.
+- Reuse components.
+- Keep code maintainable.
+- Avoid unnecessary rerenders.
+- Avoid unnecessary subscriptions.
+- Prefer efficient reactive state derivation over duplicated boolean flags.
+
+---
+
+## 16. UI flow (based on prototype)
+
+### Flow
+
+1. Welcome
+2. Initial Data
+3. OTP (if needed)
+4. Evaluation
+5. Result
+
+### Results
+
+- Offer → `/offer`
+- No Lead → `/no-lead`
+- PEP → `/pep-facta`
+
+The flow must remain inside onboarding scope only.
+
+---
+
+## 17. Routing rules
+
+Routes must be:
+
+- `/onboarding/welcome`
+- `/onboarding/initial-data`
+- `/onboarding/otp-validation`
+- `/onboarding/offer`
+- `/onboarding/no-lead`
+- `/onboarding/pep-facta`
+
+### Routing implementation
+- Prefer standalone route components.
+- Prefer lazy loading at route level.
+- Prefer modern Angular routing configuration.
+- Do not create generic routes.
+- Do not create routes outside onboarding scope.
+
+---
+
+## 18. Form structure (initial data)
+
+Fields:
+
+- `documentNumber`
+- `phoneNumber`
+- `email`
+- `isPeruvianResident`
+- `isPep`
+- `acceptsDataPolicy`
+- `promoterCode`
+- `captcha`
+
+### Validation
+
+- DNI → numeric, fixed length
+- Phone → numeric
+- Email → valid format
+- Required fields enforced
+- Optional fields must remain clearly optional
+
+---
+
+## 19. UX behavior
+
+- Disable submit when invalid.
+- Show inline errors.
+- Show loading states.
+- Clear CTA.
+- Progressive flow.
+- Prevent confusing or technical user-facing messages.
+
+---
+
+## 20. Banking UX tone
+
+Must feel:
+
+- secure
+- professional
+- clear
+- trustworthy
+
+Avoid playful UI, confusing wording, or unnecessary complexity.
+
+---
+
+## 21. What Cursor should do
+
+- Respect microfrontend scope.
+- Use Angular 20 best practices.
+- Prefer standalone APIs.
+- Prefer typed Reactive Forms.
+- Use signals pragmatically.
+- Use modern Angular routing and providers.
+- Use the design system.
+- Apply BEM.
+- Generate reactive Angular code.
+- Follow Clean Code.
+- Apply SOLID pragmatically.
+- Build production-quality code.
+
+---
+
+## 22. What Cursor should avoid
+
+- Full loan logic
+- Monolithic components
+- `any`
+- `ngModel`
+- duplicate code
+- non-responsive UI
+- breaking BEM
+- exposing secrets
+- overengineering
+- leaving onboarding scope
+- legacy Angular patterns without justification
+- unnecessary NgModules
+
+---
+
+## 23. Project summary
+
+This is a **banking onboarding microfrontend** built with **Angular 20**.
+
+It is responsible for:
+- onboarding flow
+- validation
+- qualification
+- result handling
+
+It must:
+- be reactive
+- be scalable
+- be secure
+- be maintainable
+- follow Angular 20 modern practices
+
+It must NOT:
+- implement full loan lifecycle

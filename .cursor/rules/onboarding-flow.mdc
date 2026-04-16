@@ -1,0 +1,293 @@
+---
+description: Onboarding flow rules for the banking onboarding microfrontend
+globs: ["src/app/features/onboarding/**/*", "src/app/app.routes.ts", "src/app/core/guards/**/*"]
+alwaysApply: true
+---
+
+# Onboarding Flow Rules
+
+## 1. Purpose
+
+This file defines the flow behavior of the **banking onboarding microfrontend**.
+
+This microfrontend is responsible only for:
+- welcome experience
+- initial data capture
+- OTP validation when required
+- onboarding evaluation
+- onboarding result pages
+- controlled navigation inside onboarding scope
+- handoff to downstream systems when applicable
+
+It must not assume ownership of the full loan lifecycle.
+
+---
+
+## 2. Route scope
+
+All routes in this repository must belong to the onboarding domain only.
+
+Allowed route structure:
+
+- `/onboarding/welcome`
+- `/onboarding/initial-data`
+- `/onboarding/otp-validation`
+- `/onboarding/offer`
+- `/onboarding/no-lead`
+- `/onboarding/pep-facta`
+
+Do not generate:
+- generic routes like `/step-1`, `/home`, `/form`
+- routes unrelated to onboarding
+- routes that belong to downstream loan flows
+
+---
+
+## 3. Flow definition
+
+The onboarding follows a strict guided flow.
+
+### Main flow
+
+1. `welcome`
+2. `initial-data`
+3. `otp-validation` when required
+4. `evaluation`
+5. result page
+
+### Possible result pages
+
+- `offer`
+- `no-lead`
+- `pep-facta`
+
+The flow must remain sequential and predictable.
+
+---
+
+## 4. Navigation rules
+
+- Users must not skip required steps.
+- Navigation must be controlled.
+- Invalid direct access to a step must redirect to the correct previous step.
+- Routing logic must reflect the real onboarding state.
+- Downstream navigation outside onboarding must only happen after a valid onboarding result.
+
+---
+
+## 5. OTP behavior
+
+OTP is part of onboarding, but it should only exist when the business flow requires it.
+
+### Rules
+- Do not force OTP in all flows if it is conditional.
+- OTP step must be isolated as its own page or step container.
+- OTP validation must happen before entering result-driven navigation when required.
+- OTP inputs must support numeric-only mobile-friendly behavior.
+
+---
+
+## 6. Evaluation behavior
+
+After the initial data submission, and after OTP if applicable, the onboarding must evaluate the user status through the corresponding service or orchestration layer.
+
+The evaluation result must determine the next navigation outcome.
+
+### Allowed outcomes
+- offer available → `/onboarding/offer`
+- no lead → `/onboarding/no-lead`
+- PEP or FACTA restriction → `/onboarding/pep-facta`
+
+Do not invent additional result states unless explicitly required by the business.
+
+---
+
+## 7. Result page responsibilities
+
+Result pages must remain inside onboarding scope.
+
+### Offer page
+- confirm positive onboarding result
+- show clear next action
+- allow handoff to the next owned experience if required
+
+### No lead page
+- show a clear and professional rejection or unavailable result
+- avoid confusing or overly technical language
+
+### PEP / FACTA page
+- show restricted flow outcome clearly
+- maintain trust, professionalism, and compliance tone
+
+Result pages should not implement downstream flows themselves.
+
+---
+
+## 8. Step state management
+
+The onboarding must maintain a centralized and reactive step state.
+
+State should include, when applicable:
+- current step
+- initial data completion status
+- OTP required flag
+- OTP validation status
+- evaluation status
+- evaluation result
+- loading state
+- recoverable error state
+
+State must be:
+- reactive
+- explicit
+- predictable
+- aligned with navigation rules
+
+---
+
+## 9. Guards
+
+Use guards when needed to protect onboarding navigation.
+
+### Guard expectations
+- prevent access to steps that require previous completion
+- redirect invalid access to the correct step
+- avoid exposing result pages without a real evaluation result
+- keep guard logic focused and readable
+
+### Possible guards
+- welcome or entry guard
+- initial data completion guard
+- OTP validation guard
+- evaluation result guard
+
+Use guard names in English and aligned with responsibility.
+
+---
+
+## 10. Stepper expectations
+
+If a stepper or progress indicator is implemented, it must reflect onboarding-only steps.
+
+### Rules
+- stepper must not imply full loan lifecycle ownership
+- stepper should only represent the steps owned by this microfrontend
+- keep the progress indication simple and understandable
+- do not expose future downstream steps that belong to other applications
+
+---
+
+## 11. Error and fallback behavior
+
+The flow must handle recoverable failures clearly.
+
+### Expected cases
+- invalid step access
+- failed OTP validation
+- failed evaluation request
+- unavailable backend response
+- incomplete onboarding state
+
+### Rules
+- redirect safely when the current route is not valid
+- show user-friendly fallback states
+- avoid leaving the user in a broken or dead-end flow
+- do not expose raw backend messages directly
+
+---
+
+## 12. Routing implementation guidance
+
+Routes should be implemented with modern Angular practices.
+
+### Prefer
+- standalone page components
+- lazy-loaded route-level components
+- route guards where appropriate
+- feature-oriented route organization
+
+### Avoid
+- routing definitions spread chaotically across unrelated files
+- ambiguous redirects
+- duplicated route logic
+
+---
+
+## 13. Component and page naming
+
+All route-owned pages and flow artifacts must be named in English.
+
+### Preferred names
+- `welcome-page.component.ts`
+- `initial-data-page.component.ts`
+- `otp-validation-page.component.ts`
+- `offer-result-page.component.ts`
+- `no-lead-result-page.component.ts`
+- `pep-facta-result-page.component.ts`
+
+### Preferred services and state
+- `onboarding-state.service.ts`
+- `onboarding-flow.service.ts`
+- `onboarding-result.guard.ts`
+
+Avoid Spanish names or generic names.
+
+---
+
+## 14. Handoff rule
+
+This microfrontend may hand off control to another application or microfrontend after onboarding completes successfully.
+
+### Rules
+- handoff must happen only after a valid onboarding outcome
+- handoff logic must remain explicit and isolated
+- do not assume downstream route ownership inside this repository
+- keep integration contracts minimal and clear
+
+---
+
+## 15. What Cursor should do
+
+When generating code related to onboarding flow, Cursor should:
+- keep the flow strictly inside onboarding scope
+- generate only onboarding-related routes
+- create guarded and controlled navigation
+- use a centralized reactive onboarding state
+- keep result pages independent from downstream flows
+- align the route names with the approved onboarding structure
+- maintain English naming in code
+- generate scalable and production-quality flow logic
+
+---
+
+## 16. What Cursor should avoid
+
+Cursor should avoid:
+- creating routes outside onboarding scope
+- assuming this repository owns the complete loan process
+- inventing unnecessary onboarding steps
+- exposing result pages without state validation
+- generating chaotic navigation logic
+- coupling onboarding flow with downstream loan lifecycle behavior
+- using generic route names such as `/step1` or `/result`
+
+---
+
+## 17. Flow summary
+
+This onboarding microfrontend owns only the following flow:
+
+- `/onboarding/welcome`
+- `/onboarding/initial-data`
+- `/onboarding/otp-validation` when required
+- evaluation
+- `/onboarding/offer`
+- `/onboarding/no-lead`
+- `/onboarding/pep-facta`
+
+This flow must be:
+- guided
+- reactive
+- guarded
+- predictable
+- isolated from downstream loan lifecycle responsibilities

@@ -1,0 +1,33 @@
+{
+  "onboarding": {
+    "welcome": {
+      "aria": {
+        "header": "Santander Consumer",
+        "hero": "Bienvenida",
+        "requirements": "Requisitos",
+        "recommendation": "Recomendación"
+      },
+      "brand": {
+        "name": "Santander",
+        "subtitle": "Consumer"
+      },
+      "title": {
+        "line1": "¡Descubre los",
+        "line2": "productos que",
+        "accent": "tenemos para ti!"
+      },
+      "bullets": {
+        "dni": "Solo con tu DNI",
+        "clients": "Para clientes y no clientes de Santander Consumer"
+      },
+      "info": {
+        "text": "Ten tu DNI a la mano y ubícate en un",
+        "strong": "lugar sin distracciones."
+      },
+      "cta": {
+        "start": "Empezar"
+      }
+    }
+  }
+}
+

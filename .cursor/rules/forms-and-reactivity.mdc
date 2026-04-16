@@ -1,0 +1,513 @@
+---
+description: Forms and reactivity rules for the banking onboarding microfrontend
+globs: ["src/app/**/*.ts", "src/app/**/*.html", "src/app/**/*.scss"]
+alwaysApply: true
+---
+
+# Forms and Reactivity Rules
+
+## 1. Purpose
+
+This file defines the rules for forms, validation, and reactive behavior inside the **banking onboarding microfrontend**.
+
+This repository is responsible only for onboarding-related forms and flow state.
+
+It must not generate or assume ownership of forms that belong to downstream loan lifecycle processes.
+
+---
+
+## 2. Scope
+
+The forms in this microfrontend are limited to onboarding-related use cases such as:
+- initial data capture
+- OTP validation
+- consent handling
+- basic qualification inputs
+- onboarding result orchestration
+
+Do not generate forms for:
+- loan disbursement
+- repayment
+- account management
+- post-onboarding servicing
+- unrelated banking domains
+
+---
+
+## 3. General reactive approach
+
+This project must use a **reactive approach** for all business forms and onboarding state.
+
+Prefer:
+- Angular Reactive Forms
+- typed forms when practical
+- declarative reactive patterns
+- RxJS for async orchestration
+- Angular signals for local synchronous UI state
+
+Avoid:
+- template-driven forms for business flows
+- `ngModel` in onboarding forms
+- imperative-heavy implementations
+- scattered validation logic
+- deeply nested subscriptions
+
+---
+
+## 4. Reactive Forms are mandatory
+
+All onboarding business forms must use **Reactive Forms**.
+
+Use Reactive Forms for:
+- initial data form
+- OTP validation form or OTP field orchestration
+- consent and checkbox flows
+- conditional onboarding validation fields
+
+Do not use template-driven forms for onboarding business logic.
+
+---
+
+## 5. Typed forms
+
+Prefer **typed Reactive Forms** whenever practical.
+
+### Rules
+- Form groups must be explicitly typed when useful.
+- Form controls must represent the business data type clearly.
+- Avoid untyped forms unless a technical limitation justifies it.
+
+### Preferred examples
+- `FormGroup<InitialDataForm>`
+- `FormControl<string | null>`
+- `FormControl<boolean | null>`
+
+Typed forms must improve readability and maintainability.
+
+---
+
+## 6. Form building conventions
+
+Prefer one of these approaches:
+- `FormBuilder`
+- `NonNullableFormBuilder` when appropriate
+- explicit `new FormGroup(...)` when clarity is better
+
+### Rules
+- Create forms in dedicated private builder methods.
+- Keep form configuration readable and grouped logically.
+- Validators must be explicit and easy to find.
+- Default values must be intentional.
+
+### Preferred structure
+- define controls
+- define validators
+- define default values
+- expose readonly form reference when practical
+
+---
+
+## 7. Onboarding form expectations
+
+### Initial data form
+The initial data form is the primary onboarding form in this microfrontend.
+
+It should support fields such as:
+- `documentNumber`
+- `phoneNumber`
+- `email`
+- `isPeruvianResident`
+- `isPep`
+- `acceptsDataPolicy`
+- `promoterCode`
+- `captcha`
+
+### OTP validation
+OTP behavior must remain isolated and clear.
+
+It may be implemented as:
+- a dedicated OTP form
+- a dedicated OTP page-level control model
+- a wrapper around a design system OTP component integrated with reactive state
+
+### Rules
+- OTP must support numeric-only behavior
+- OTP validation must be explicit
+- OTP flow must be readable and isolated from unrelated logic
+
+---
+
+## 8. Validation rules
+
+Validation logic must be:
+- explicit
+- reusable
+- readable
+- business-oriented
+- user-friendly
+
+### Validation expectations
+- Keep validation aligned with the domain meaning of the field.
+- Use built-in validators when sufficient.
+- Extract custom validators when reuse or clarity justifies it.
+- Avoid large inline validation blocks inside components.
+
+### Typical onboarding validation examples
+- document number must be numeric and fixed length
+- phone number must be numeric and valid length
+- email must use proper format
+- consent checkboxes must be enforced when required
+- OTP must be numeric and length-restricted
+- optional fields must remain clearly optional
+
+### UX expectations
+- Show user-friendly error messages
+- Do not expose technical validation wording
+- Required fields must be clearly indicated
+- Validation timing must be appropriate to the UX
+
+---
+
+## 9. Reusable validators
+
+Reusable validators must live in shared or onboarding-specific validator folders.
+
+Examples:
+- `document-number.validator.ts`
+- `phone-number.validator.ts`
+- `otp.validator.ts`
+- `required-true.validator.ts`
+
+### Rules
+- Validators must have one clear responsibility
+- Names must reflect business meaning
+- Avoid generic validators with vague purpose
+- Extract validators only when reuse or readability justifies it
+
+---
+
+## 10. Form state handling
+
+Form state must be managed clearly and predictably.
+
+### Expected states
+- pristine
+- dirty
+- touched
+- valid
+- invalid
+- pending
+- disabled
+
+### Rules
+- Submit actions must depend on business-valid form state
+- Disable primary actions when required
+- Async pending states must be visible
+- Avoid ambiguous button or field states
+
+---
+
+## 11. Submission flow
+
+Form submission must follow a clean and predictable pattern.
+
+### Expected sequence
+1. mark interaction when needed
+2. validate form state
+3. stop if invalid
+4. map form value to request model
+5. execute orchestration or API call
+6. handle loading, success, and error states
+7. navigate or update onboarding state only when appropriate
+
+### Rules
+- Keep submit methods short and readable
+- Do not mix too many concerns in one method
+- Avoid confusing chains of validation, mapping, API, and navigation in one block
+
+---
+
+## 12. Mapping form values
+
+Map form values explicitly from UI structure to onboarding request models.
+
+### Rules
+- Do not send raw form values blindly when transformation is needed
+- Create private mapping methods when useful
+- Keep payload construction explicit
+- Reflect onboarding business meaning clearly
+
+### Preferred names
+- `mapFormToInitialDataRequest()`
+- `mapFormToOtpRequest()`
+
+Avoid vague names such as:
+- `buildData()`
+- `getPayload()`
+unless the scope is crystal clear
+
+---
+
+## 13. Reactive state patterns
+
+Prefer declarative reactive state patterns.
+
+### Prefer
+- readonly observables or signals for exposed state
+- computed or derived state where useful
+- local UI state derived from form state
+- central onboarding state for cross-step orchestration
+
+### Avoid
+- scattered mutable flags
+- manual synchronization when state can be derived
+- confusing mixing of reactive approaches
+
+---
+
+## 14. RxJS usage rules
+
+RxJS must be used clearly and intentionally.
+
+### Prefer
+- readable operator chains
+- `map`, `switchMap`, `filter`, `tap`, `catchError`, `finalize` when appropriate
+- composition instead of nested subscriptions
+- `async` pipe in templates where applicable
+
+### Avoid
+- nested subscriptions
+- unreadable long pipelines
+- duplicated subscriptions to the same flow
+- excessive side effects inside streams
+
+### Subscription management
+- Avoid manual subscriptions when template binding or declarative composition is enough
+- If manual subscriptions are required, manage them safely and cleanly
+- Cleanup must be predictable
+
+---
+
+## 15. Signals usage rules
+
+Signals may be used when they improve clarity for local onboarding UI state.
+
+### Good use cases
+- loading state
+- current onboarding step
+- local toggle state
+- simple derived readonly UI state
+- local result visibility
+
+### Rules
+- Do not mix signals and observables in a confusing way
+- Prefer signals for local synchronous state
+- Prefer RxJS for async orchestration and service integration
+
+---
+
+## 16. Async UI states
+
+Every onboarding form with async behavior must consider:
+- loading
+- success
+- error
+- retry or fallback when appropriate
+
+### Rules
+- Buttons must reflect loading state
+- Prevent duplicate submissions
+- Error feedback must be clear and professional
+- Do not leave the user in an ambiguous UI state
+
+---
+
+## 17. Error handling
+
+Error handling must be clean and business-oriented.
+
+### Rules
+- Do not expose raw backend errors directly to users
+- Map technical failures to understandable messages
+- Keep technical error handling in the right layer
+- Reuse error mapping utilities when appropriate
+
+---
+
+## 18. Component structure for forms
+
+Form components must remain cohesive and readable.
+
+### Recommended order inside component class
+- injected dependencies
+- readonly state
+- form declaration
+- lifecycle hooks
+- public handlers
+- submit method
+- private form builders
+- private mapping methods
+- private helpers
+
+### Rules
+- One form component should have one main responsibility
+- Extract repeated field groups when justified
+- Keep orchestration separate from field rendering when complexity grows
+
+---
+
+## 19. Presentational vs container strategy
+
+When form complexity grows, split responsibilities pragmatically.
+
+### Container components
+Responsible for:
+- orchestration
+- service calls
+- navigation
+- interaction with onboarding state
+
+### Presentational components
+Responsible for:
+- rendering fields
+- displaying validation messages
+- emitting user interactions
+- using design system controls
+
+Use this split when it improves clarity. Do not overengineer small forms.
+
+---
+
+## 20. Design system usage in forms
+
+All forms must prioritize the bank design system from `stencil-library-0.1.47.tgz`.
+
+### Rules
+- Use design system inputs, buttons, checkboxes, radios, and alerts first
+- Create wrappers only when Angular form integration requires it
+- Keep wrappers reusable and focused
+- Respect component APIs, events, and states
+- If working with web components, adapt carefully for reactive form integration
+
+---
+
+## 21. HTML semantics for onboarding fields
+
+Use correct semantics for each field.
+
+### Examples
+- document number should favor numeric mobile behavior
+- OTP inputs must favor numeric-only mobile-friendly behavior
+- email fields must use email semantics
+- phone fields must use phone-friendly input semantics
+- consent fields must use semantic checkbox controls
+
+### Rules
+- Prioritize mobile usability
+- Use correct accessibility attributes
+- Align field semantics with expected device keyboard behavior
+
+---
+
+## 22. BEM for form styles
+
+All custom form-related styles must follow **BEM**.
+
+### Examples
+- `initial-data-form`
+- `initial-data-form__group`
+- `initial-data-form__field`
+- `initial-data-form__error`
+- `initial-data-form__actions`
+- `initial-data-form__submit`
+- `initial-data-form__submit--loading`
+- `otp-validation`
+- `otp-validation__field`
+- `otp-validation__error`
+
+### Rules
+- Use meaningful names aligned with onboarding business context
+- Keep styling modular and scoped
+- Avoid vague class names such as `box`, `item`, `row`, `field-item`
+
+---
+
+## 23. Naming conventions
+
+All code must be in **English**.
+
+### Prefer names like
+- `initialDataForm`
+- `buildInitialDataForm`
+- `submitInitialData`
+- `mapFormToInitialDataRequest`
+- `documentNumber`
+- `phoneNumber`
+- `acceptsDataPolicy`
+- `isPep`
+- `otpCode`
+
+### Avoid
+- Spanish names in code
+- vague names such as `data`, `values`, `info`, `payloadData`
+
+UI text may remain in Spanish if required by business.
+
+---
+
+## 24. Performance expectations
+
+- Avoid repeated subscriptions to form changes without reason
+- Avoid unnecessary recomputation
+- Keep large forms modular
+- Reuse validators and mapping logic where helpful
+- Avoid template patterns that trigger unnecessary work
+
+---
+
+## 25. What Cursor should do
+
+When generating form-related code, Cursor should:
+- keep all forms inside onboarding microfrontend scope
+- use Reactive Forms by default
+- prefer typed forms
+- create reactive Angular components
+- keep validation explicit and reusable
+- use readable RxJS patterns
+- use signals pragmatically when useful
+- prioritize the bank design system
+- use BEM for custom styles
+- generate production-quality form behavior
+- keep accessibility, mobile usability, and banking UX standards in mind
+
+---
+
+## 26. What Cursor should avoid
+
+Cursor should avoid:
+- generating forms outside onboarding scope
+- `ngModel` for onboarding business forms
+- template-driven business forms
+- nested subscriptions
+- unclear validation logic
+- huge submit methods
+- mixing orchestration and field rendering unnecessarily
+- raw backend errors shown directly to users
+- non-reactive imperative-heavy implementations when a reactive approach is clearer
+- weak naming
+- breaking BEM conventions in form styles
+
+---
+
+## 27. Summary
+
+This microfrontend uses a **reactive forms-first approach** for onboarding only.
+
+Forms must be:
+- reactive
+- typed where practical
+- clear
+- maintainable
+- mobile-friendly
+- aligned with the bank design system
+- limited strictly to onboarding responsibilities
