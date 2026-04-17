@@ -65,6 +65,10 @@
   gap: 10px;
 }
 
+.personal-data-page__field--pep.personal-data-page__field--stack {
+  gap: 16px;
+}
+
 .personal-data-page__question {
   margin: 4px 0 0;
   font-size: 15px;
@@ -82,6 +86,18 @@
 .personal-data-page__question-row .personal-data-page__question {
   flex: 1;
   margin-top: 0;
+}
+
+.personal-data-page__question--pep {
+  font-weight: 400;
+}
+
+.personal-data-page__question-regular {
+  font-weight: 400;
+}
+
+.personal-data-page__question-emphasis {
+  font-weight: 700;
 }
 
 .personal-data-page__info-button {

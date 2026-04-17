@@ -57,9 +57,14 @@
           "helper": "Escribe aquí el código del promotor Santander Consumer que estará contigo en este proceso."
         }
       },
+      "options": {
+        "yes": "Sí",
+        "no": "No"
+      },
       "questions": {
         "resident": "¿Eres peruano(a) de nacimiento, cuentas con domicilio fiscal en Perú y solo tributas en Perú?",
-        "pep": "¿Eres una Persona Políticamente Expuesta?",
+        "pepPrefix": "¿Eres una ",
+        "pepBold": "Persona Políticamente Expuesta?",
         "pepInfoAria": "Información sobre Persona Políticamente Expuesta"
       },
       "pepModal": {

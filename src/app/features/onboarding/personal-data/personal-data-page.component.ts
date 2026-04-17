@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  computed,
   CUSTOM_ELEMENTS_SCHEMA,
   DestroyRef,
   ElementRef,
@@ -51,10 +52,18 @@ export class PersonalDataPageComponent implements OnDestroy {
 
   readonly pepModalOpen = signal(false);
 
-  readonly yesNoRadioItems: { value: string; label: string }[] = [
-    { value: 'yes', label: 'Sí' },
-    { value: 'no', label: 'No' }
-  ];
+  /**
+   * std-radio-group shadow CSS only includes Tailwind gap-2 / gap-4 (not gap-3/5/6).
+   * gap-4 ≈ 1rem between flex rows; with label+slot children the visible space between Sí/No is close to ~26–32px.
+   */
+  readonly radioGroupStackClasses = 'flex flex-col gap-4';
+
+  readonly optionYes = this.text.getTextSignal('onboarding.personalData.options.yes');
+  readonly optionNo = this.text.getTextSignal('onboarding.personalData.options.no');
+  readonly yesNoRadioItems = computed(() => [
+    { value: 'yes', label: this.optionYes() },
+    { value: 'no', label: this.optionNo() }
+  ]);
 
   readonly form = this.fb.nonNullable.group({
     documentNumber: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
@@ -79,7 +88,8 @@ export class PersonalDataPageComponent implements OnDestroy {
   readonly labelEmail = this.text.getTextSignal('onboarding.personalData.fields.email.label');
   readonly placeholderEmail = this.text.getTextSignal('onboarding.personalData.fields.email.placeholder');
   readonly questionResident = this.text.getTextSignal('onboarding.personalData.questions.resident');
-  readonly questionPep = this.text.getTextSignal('onboarding.personalData.questions.pep');
+  readonly questionPepPrefix = this.text.getTextSignal('onboarding.personalData.questions.pepPrefix');
+  readonly questionPepBold = this.text.getTextSignal('onboarding.personalData.questions.pepBold');
   readonly pepInfoAria = this.text.getTextSignal('onboarding.personalData.questions.pepInfoAria');
   readonly pepModalTitle = this.text.getTextSignal('onboarding.personalData.pepModal.title');
   readonly pepModalBody = this.text.getTextSignal('onboarding.personalData.pepModal.body');

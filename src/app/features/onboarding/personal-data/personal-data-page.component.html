@@ -92,8 +92,8 @@
         <p class="personal-data-page__question" id="q-resident">{{ questionResident() }}</p>
         <std-radio-group
           name="isPeruvianResident"
-          classes-container="flex flex-col gap-3"
-          [items]="yesNoRadioItems"
+          [classesContainer]="radioGroupStackClasses"
+          [items]="yesNoRadioItems()"
           [value]="form.controls.isPeruvianResident.value"
           [status]="residentRadioStatus()"
           (changeEvent)="onResidentChange($any($event).detail)"
@@ -103,9 +103,12 @@
         }
       </div>
 
-      <div class="personal-data-page__field personal-data-page__field--stack">
+      <div class="personal-data-page__field personal-data-page__field--stack personal-data-page__field--pep">
         <div class="personal-data-page__question-row">
-          <p class="personal-data-page__question" id="q-pep">{{ questionPep() }}</p>
+          <p class="personal-data-page__question personal-data-page__question--pep" id="q-pep">
+            <span class="personal-data-page__question-regular">{{ questionPepPrefix() }}</span
+            ><strong class="personal-data-page__question-emphasis">{{ questionPepBold() }}</strong>
+          </p>
           <button
             type="button"
             class="personal-data-page__info-button"
@@ -117,8 +120,8 @@
         </div>
         <std-radio-group
           name="isPep"
-          classes-container="flex flex-col gap-3"
-          [items]="yesNoRadioItems"
+          [classesContainer]="radioGroupStackClasses"
+          [items]="yesNoRadioItems()"
           [value]="form.controls.isPep.value"
           [status]="pepRadioStatus()"
           (changeEvent)="onPepChange($any($event).detail)"
