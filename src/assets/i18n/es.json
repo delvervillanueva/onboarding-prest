@@ -27,6 +27,63 @@
       "cta": {
         "start": "Empezar"
       }
+    },
+    "personalData": {
+      "aria": {
+        "page": "Datos personales"
+      },
+      "title": {
+        "prefix": "Empecemos con",
+        "accent1": "tus datos",
+        "middle": "para darte una",
+        "accent2": "oferta personalizada"
+      },
+      "fields": {
+        "dni": {
+          "label": "DNI",
+          "placeholder": "Ej: 45673456"
+        },
+        "phone": {
+          "label": "Celular",
+          "placeholder": "Ej: 98989898"
+        },
+        "email": {
+          "label": "Correo electrónico",
+          "placeholder": "usuario@correo.com"
+        },
+        "promoter": {
+          "label": "Código del promotor",
+          "placeholder": "985764",
+          "helper": "Escribe aquí el código del promotor Santander Consumer que estará contigo en este proceso."
+        }
+      },
+      "questions": {
+        "resident": "¿Eres peruano(a) de nacimiento, cuentas con domicilio fiscal en Perú y solo tributas en Perú?",
+        "pep": "¿Eres una Persona Políticamente Expuesta?",
+        "pepInfoAria": "Información sobre Persona Políticamente Expuesta"
+      },
+      "pepModal": {
+        "title": "Persona Políticamente Expuesta (PEP)",
+        "body": "Una PEP es quien desempeña o ha desempeñado funciones públicas destacadas. Esta información nos ayuda a cumplir con la normativa aplicable.",
+        "close": "Entendido"
+      },
+      "consent": {
+        "part1": "Autorizo el tratamiento de mis datos personales para",
+        "link": "fines comerciales y/o publicitarios",
+        "part2": "."
+      },
+      "cta": {
+        "continue": "Continuar"
+      },
+      "errors": {
+        "required": "Este campo es obligatorio.",
+        "dni": "Ingresa un DNI válido de 8 dígitos.",
+        "phone": "Ingresa un celular válido de 9 dígitos.",
+        "email": "Ingresa un correo electrónico válido.",
+        "yesNo": "Selecciona una opción.",
+        "policy": "Debes autorizar el tratamiento de datos para continuar.",
+        "captcha": "Completa la verificación para continuar."
+      }
     }
   }
 }

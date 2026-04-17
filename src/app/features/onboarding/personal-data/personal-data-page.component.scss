@@ -1,0 +1,215 @@
+.personal-data-page {
+  --personal-data-red: #ec0000;
+  --personal-data-text: #222222;
+  --personal-data-muted: #5c6670;
+  --personal-data-rule: #e1e4e8;
+  --personal-data-link: #1374e4;
+  --personal-data-info-bg: #1374e4;
+
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  color: var(--personal-data-text);
+}
+
+.personal-data-page__header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 16px 4px;
+}
+
+.personal-data-page__logo {
+  width: 124px;
+  height: auto;
+  display: block;
+}
+
+.personal-data-page__form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 20px 24px;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.personal-data-page__title {
+  margin: 0 0 20px;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 700;
+  text-align: left;
+}
+
+.personal-data-page__title-accent {
+  color: var(--personal-data-red);
+  font-weight: 800;
+}
+
+.personal-data-page__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.personal-data-page__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.personal-data-page__field--stack {
+  gap: 10px;
+}
+
+.personal-data-page__question {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--personal-data-text);
+}
+
+.personal-data-page__question-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.personal-data-page__question-row .personal-data-page__question {
+  flex: 1;
+  margin-top: 0;
+}
+
+.personal-data-page__info-button {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--personal-data-info-bg);
+  color: #ffffff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.personal-data-page__info-button:focus-visible {
+  outline: 3px solid rgba(19, 116, 228, 0.35);
+  outline-offset: 2px;
+}
+
+.personal-data-page__info-icon {
+  font-size: 12px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+}
+
+.personal-data-page__error {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--personal-data-red);
+}
+
+.personal-data-page__error--consent {
+  margin-top: 8px;
+}
+
+.personal-data-page__rule {
+  border: none;
+  border-top: 1px solid var(--personal-data-rule);
+  margin: 18px 0;
+}
+
+.personal-data-page__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.personal-data-page__consent-copy {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--personal-data-text);
+}
+
+.personal-data-page__consent-text {
+  font-weight: 600;
+}
+
+.personal-data-page__consent-link {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  color: var(--personal-data-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.personal-data-page__consent-link:focus-visible {
+  outline: 2px solid var(--personal-data-link);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.personal-data-page__captcha {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.personal-data-page__recaptcha-host {
+  min-height: 78px;
+}
+
+.personal-data-page__footer {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+.personal-data-page__submit {
+  width: 100%;
+  max-width: 360px;
+  height: 54px;
+}
+
+.personal-data-page__modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.personal-data-page__modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.personal-data-page__modal-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--personal-data-muted);
+}
+
+.personal-data-page__modal-body std-button {
+  width: 100%;
+  margin-top: 8px;
+}

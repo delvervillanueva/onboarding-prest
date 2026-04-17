@@ -1,0 +1,206 @@
+<main class="personal-data-page" [attr.aria-label]="ariaPage()">
+  <header class="personal-data-page__header">
+    <img
+      class="personal-data-page__logo"
+      src="/assets/images/welcome/LogoSantander.svg"
+      alt=""
+      loading="eager"
+      decoding="async"
+    />
+  </header>
+
+  <form class="personal-data-page__form" [formGroup]="form" (submit)="onFormSubmit($event)" novalidate>
+    <h1 class="personal-data-page__title">
+      {{ titlePrefix() }}
+      <span class="personal-data-page__title-accent">{{ titleAccent1() }}</span>
+      {{ titleMiddle() }}
+      <span class="personal-data-page__title-accent">{{ titleAccent2() }}</span>
+    </h1>
+
+    <div class="personal-data-page__fields">
+      <div class="personal-data-page__field">
+        <std-input
+          html-id="personal-data-dni"
+          name="documentNumber"
+          type="text"
+          inputmode="numeric"
+          [label]="labelDni()"
+          [placeholder]="placeholderDni()"
+          [value]="form.controls.documentNumber.value"
+          [maxlength]="8"
+          [status]="documentNumberStatus()"
+          (changeEvent)="onDocumentInput($any($event).detail)"
+        ></std-input>
+        @if (form.controls.documentNumber.invalid && form.controls.documentNumber.touched) {
+          <p class="personal-data-page__error" role="alert">
+            @if (form.controls.documentNumber.hasError('required')) {
+              {{ errorRequired() }}
+            } @else {
+              {{ errorDni() }}
+            }
+          </p>
+        }
+      </div>
+
+      <div class="personal-data-page__field">
+        <std-input
+          html-id="personal-data-phone"
+          name="phoneNumber"
+          type="text"
+          inputmode="numeric"
+          [label]="labelPhone()"
+          [placeholder]="placeholderPhone()"
+          [value]="form.controls.phoneNumber.value"
+          [maxlength]="9"
+          [status]="phoneNumberStatus()"
+          (changeEvent)="onPhoneInput($any($event).detail)"
+        ></std-input>
+        @if (form.controls.phoneNumber.invalid && form.controls.phoneNumber.touched) {
+          <p class="personal-data-page__error" role="alert">
+            @if (form.controls.phoneNumber.hasError('required')) {
+              {{ errorRequired() }}
+            } @else {
+              {{ errorPhone() }}
+            }
+          </p>
+        }
+      </div>
+
+      <div class="personal-data-page__field">
+        <std-input
+          html-id="personal-data-email"
+          name="email"
+          type="email"
+          [label]="labelEmail()"
+          [placeholder]="placeholderEmail()"
+          [value]="form.controls.email.value"
+          [status]="emailStatus()"
+          (changeEvent)="onEmailInput($any($event).detail)"
+        ></std-input>
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+          <p class="personal-data-page__error" role="alert">
+            @if (form.controls.email.hasError('required')) {
+              {{ errorRequired() }}
+            } @else {
+              {{ errorEmail() }}
+            }
+          </p>
+        }
+      </div>
+
+      <div class="personal-data-page__field personal-data-page__field--stack">
+        <p class="personal-data-page__question" id="q-resident">{{ questionResident() }}</p>
+        <std-radio-group
+          name="isPeruvianResident"
+          classes-container="flex flex-col gap-3"
+          [items]="yesNoRadioItems"
+          [value]="form.controls.isPeruvianResident.value"
+          [status]="residentRadioStatus()"
+          (changeEvent)="onResidentChange($any($event).detail)"
+        ></std-radio-group>
+        @if (form.controls.isPeruvianResident.invalid && form.controls.isPeruvianResident.touched) {
+          <p class="personal-data-page__error" role="alert">{{ errorYesNo() }}</p>
+        }
+      </div>
+
+      <div class="personal-data-page__field personal-data-page__field--stack">
+        <div class="personal-data-page__question-row">
+          <p class="personal-data-page__question" id="q-pep">{{ questionPep() }}</p>
+          <button
+            type="button"
+            class="personal-data-page__info-button"
+            [attr.aria-label]="pepInfoAria()"
+            (click)="openPepInfo()"
+          >
+            <span class="personal-data-page__info-icon" aria-hidden="true">i</span>
+          </button>
+        </div>
+        <std-radio-group
+          name="isPep"
+          classes-container="flex flex-col gap-3"
+          [items]="yesNoRadioItems"
+          [value]="form.controls.isPep.value"
+          [status]="pepRadioStatus()"
+          (changeEvent)="onPepChange($any($event).detail)"
+        ></std-radio-group>
+        @if (form.controls.isPep.invalid && form.controls.isPep.touched) {
+          <p class="personal-data-page__error" role="alert">{{ errorYesNo() }}</p>
+        }
+      </div>
+    </div>
+
+    <hr class="personal-data-page__rule" />
+
+    <div class="personal-data-page__consent">
+      <std-checkbox
+        name="acceptsDataPolicy"
+        value="accepts"
+        [checked]="form.controls.acceptsDataPolicy.value"
+        [status]="checkboxPolicyStatus()"
+        (changeEvent)="onPolicyChange($event)"
+      ></std-checkbox>
+      <div class="personal-data-page__consent-copy">
+        <span class="personal-data-page__consent-text">{{ consentPart1() }}</span>
+        <button type="button" class="personal-data-page__consent-link">{{ consentLink() }}</button>
+        <span class="personal-data-page__consent-text">{{ consentPart2() }}</span>
+      </div>
+    </div>
+    @if (form.controls.acceptsDataPolicy.invalid && form.controls.acceptsDataPolicy.touched) {
+      <p class="personal-data-page__error personal-data-page__error--consent" role="alert">
+        {{ errorPolicy() }}
+      </p>
+    }
+
+    <hr class="personal-data-page__rule" />
+
+    <div class="personal-data-page__field">
+      <std-input
+        html-id="personal-data-promoter"
+        name="promoterCode"
+        type="text"
+        [label]="labelPromoter()"
+        [placeholder]="placeholderPromoter()"
+        [helperText]="helperPromoter()"
+        [value]="form.controls.promoterCode.value"
+        [status]="promoterStatus()"
+        (changeEvent)="onPromoterInput($any($event).detail)"
+      ></std-input>
+    </div>
+
+    <div class="personal-data-page__captcha">
+      <div #recaptchaContainer class="personal-data-page__recaptcha-host"></div>
+      @if (form.controls.captchaResponse.invalid && form.controls.captchaResponse.touched) {
+        <p class="personal-data-page__error" role="alert">{{ errorCaptcha() }}</p>
+      }
+    </div>
+
+    <footer class="personal-data-page__footer">
+      <std-button
+        class="personal-data-page__submit"
+        type="primary"
+        size="l"
+        [attr.label]="ctaContinue()"
+        [disabled]="form.invalid"
+        (clickEvent)="submitFromButton()"
+      ></std-button>
+    </footer>
+  </form>
+
+  <std-modal-native
+    [show]="pepModalOpen()"
+    size="s"
+    [noFooter]="true"
+    (iconClick)="closePepModal()"
+  >
+    <div class="personal-data-page__modal-body">
+      <h2 class="personal-data-page__modal-title">{{ pepModalTitle() }}</h2>
+      <p class="personal-data-page__modal-text">{{ pepModalBody() }}</p>
+      <std-button
+        type="primary"
+        size="l"
+        [attr.label]="pepModalClose()"
+        (clickEvent)="closePepModal()"
+      ></std-button>
+    </div>
+  </std-modal-native>
+</main>

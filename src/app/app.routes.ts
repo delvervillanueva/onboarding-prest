@@ -13,8 +13,8 @@ export const routes: Routes = [
       {
         path: 'initial-data',
         loadComponent: () =>
-          import('./features/onboarding/initial-data/initial-data-page.component').then(
-            (m) => m.InitialDataPageComponent
+          import('./features/onboarding/personal-data/personal-data-page.component').then(
+            (m) => m.PersonalDataPageComponent
           )
       }
     ]
