@@ -1,0 +1,94 @@
+.confirmed-offer {
+  --confirmed-offer-red: #ec0000;
+  --confirmed-offer-text: #222222;
+  --confirmed-offer-muted: #5c6670;
+  --confirmed-offer-bg: #f4f7f8;
+
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--confirmed-offer-bg);
+  color: var(--confirmed-offer-text);
+}
+
+.confirmed-offer__header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 16px 8px;
+}
+
+.confirmed-offer__logo {
+  width: 124px;
+  height: auto;
+  display: block;
+}
+
+.confirmed-offer__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 12px 20px 24px;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.confirmed-offer__illustration-wrap {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.confirmed-offer__illustration {
+  width: 140px;
+  height: auto;
+  max-height: 160px;
+  object-fit: contain;
+  display: block;
+}
+
+.confirmed-offer__title {
+  margin: 0 0 16px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.confirmed-offer__title-accent {
+  color: var(--confirmed-offer-red);
+}
+
+.confirmed-offer__description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--confirmed-offer-muted);
+  max-width: 340px;
+}
+
+.confirmed-offer__footer {
+  padding: 16px 20px 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.confirmed-offer__cta {
+  width: 100%;
+  max-width: 360px;
+  height: 54px;
+}
+
+.confirmed-offer__cta:focus-visible {
+  outline: 3px solid rgba(236, 0, 0, 0.35);
+  outline-offset: 3px;
+}

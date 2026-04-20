@@ -89,6 +89,22 @@
         "policy": "Debes autorizar el tratamiento de datos para continuar.",
         "captcha": "Completa la verificación para continuar."
       }
+    },
+    "confirmedOffer": {
+      "aria": {
+        "page": "Oferta confirmada"
+      },
+      "title": {
+        "prefix": "Tenemos una",
+        "accent": "oferta disponible para ti"
+      },
+      "description": "Para mostrarla, y por tu seguridad, necesitamos verificar tu identidad. Ten tu DNI a la mano.",
+      "cta": {
+        "start": "Comenzar"
+      },
+      "illustration": {
+        "alt": "Oferta disponible"
+      }
     }
   }
 }

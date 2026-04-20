@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TextService } from '../../../core/services/text.service';
 
 /** Google reCAPTCHA v2 test key (always passes); replace with production site key. */
@@ -41,6 +42,7 @@ declare global {
 })
 export class PersonalDataPageComponent implements OnDestroy {
   private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly ngZone = inject(NgZone);
   private readonly destroyRef = inject(DestroyRef);
@@ -244,6 +246,7 @@ export class PersonalDataPageComponent implements OnDestroy {
     };
     // Wire onboarding evaluation / API next; payload is ready for the orchestration layer.
     void payload;
+    void this.router.navigateByUrl('/onboarding/confirmed-offer');
   }
 
   private async initRecaptcha(): Promise<void> {

@@ -16,6 +16,13 @@ export const routes: Routes = [
           import('./features/onboarding/personal-data/personal-data-page.component').then(
             (m) => m.PersonalDataPageComponent
           )
+      },
+      {
+        path: 'confirmed-offer',
+        loadComponent: () =>
+          import('./features/onboarding/confirmed-offer/confirmed-offer-page.component').then(
+            (m) => m.ConfirmedOfferPageComponent
+          )
       }
     ]
   },

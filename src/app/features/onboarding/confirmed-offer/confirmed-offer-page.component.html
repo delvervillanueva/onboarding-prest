@@ -1,0 +1,39 @@
+<main class="confirmed-offer" [attr.aria-label]="ariaPage()">
+  <header class="confirmed-offer__header">
+    <img
+      class="confirmed-offer__logo"
+      src="/assets/images/welcome/LogoSantander.svg"
+      alt=""
+      loading="eager"
+      decoding="async"
+    />
+  </header>
+
+  <section class="confirmed-offer__content">
+    <div class="confirmed-offer__illustration-wrap" aria-hidden="true">
+      <img
+        class="confirmed-offer__illustration"
+        src="/assets/images/welcome/illustration.svg"
+        [attr.alt]="illustrationAlt()"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+
+    <h1 class="confirmed-offer__title">
+      {{ titlePrefix() }} <span class="confirmed-offer__title-accent">{{ titleAccent() }}</span>
+    </h1>
+
+    <p class="confirmed-offer__description">{{ description() }}</p>
+  </section>
+
+  <footer class="confirmed-offer__footer">
+    <std-button
+      class="confirmed-offer__cta"
+      type="primary"
+      size="l"
+      [attr.label]="ctaStart()"
+      (clickEvent)="start()"
+    ></std-button>
+  </footer>
+</main>
