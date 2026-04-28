@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, inject, input, output } from '@angular/core';
-import { TextService } from '../../../../core/services/text.service';
+import { TextService } from '../../../core/services/text.service';
 
 @Component({
   selector: 'app-confirm-personal-data-modal',
