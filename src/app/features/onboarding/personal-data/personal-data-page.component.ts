@@ -17,6 +17,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TextService } from '../../../core/services/text.service';
+import { ConfirmPersonalDataModalComponent } from './confirm-personal-data-modal/confirm-personal-data-modal.component';
 
 /** Google reCAPTCHA v2 test key (always passes); replace with production site key. */
 const RECAPTCHA_TEST_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
@@ -34,7 +35,7 @@ declare global {
 @Component({
   selector: 'app-personal-data-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ConfirmPersonalDataModalComponent],
   templateUrl: './personal-data-page.component.html',
   styleUrl: './personal-data-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,6 +54,7 @@ export class PersonalDataPageComponent implements OnDestroy {
   private recaptchaWidgetId: number | null = null;
 
   readonly pepModalOpen = signal(false);
+  readonly confirmPersonalDataModalOpen = signal(false);
 
   /**
    * std-radio-group shadow CSS only includes Tailwind gap-2 / gap-4 (not gap-3/5/6).
@@ -166,6 +168,38 @@ export class PersonalDataPageComponent implements OnDestroy {
   closePepModal(): void {
     this.pepModalOpen.set(false);
     this.cdr.markForCheck();
+  }
+
+  openConfirmPersonalDataModal(): void {
+    this.pepModalOpen.set(false);
+    this.confirmPersonalDataModalOpen.set(true);
+    this.cdr.markForCheck();
+  }
+
+  closeConfirmPersonalDataModal(): void {
+    this.confirmPersonalDataModalOpen.set(false);
+    this.cdr.markForCheck();
+  }
+
+  confirmPersonalData(): void {
+    this.closeConfirmPersonalDataModal();
+    this.submit();
+  }
+
+  editPersonalData(): void {
+    this.closeConfirmPersonalDataModal();
+  }
+
+  closeOnBackdropClick(event: MouseEvent, modal: 'pep' | 'confirm'): void {
+    const path = event.composedPath?.() ?? [];
+    const dialog = path.find((n): n is HTMLDialogElement => n instanceof HTMLDialogElement);
+    if (!dialog) {
+      return;
+    }
+    // Clicking the native <dialog> backdrop targets the dialog itself.
+    if (event.target === dialog) {
+      modal === 'pep' ? this.closePepModal() : this.closeConfirmPersonalDataModal();
+    }
   }
 
   onDocumentInput(value: unknown): void {

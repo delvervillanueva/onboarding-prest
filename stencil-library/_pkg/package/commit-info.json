@@ -1,0 +1,13 @@
+{
+  "built": "2025-09-10 15:31:57",
+  "appName": "stencil-library",
+  "appVersion": "0.1.47",
+  "stencil": "v4.7.0",
+  "commit": {
+    "branch": "feature/develop",
+    "hash": "ffa77cab04edc95e4caa9973935f67de2e2c592d",
+    "comment": "modified toggle",
+    "auth": "Luis Simon (lsimon_ntt@santander.com.pe)",
+    "date": "2025-09-10 15:20:10 -0500"
+  }
+}

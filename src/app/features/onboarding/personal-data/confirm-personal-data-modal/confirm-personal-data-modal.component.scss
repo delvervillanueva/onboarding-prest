@@ -1,0 +1,102 @@
+.confirm-personal-data-modal {
+  --confirm-text: #222222;
+  --confirm-muted: #5c6670;
+  --confirm-border: #d7dde3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 4px 2px 8px;
+  color: var(--confirm-text);
+}
+
+.confirm-personal-data-modal__icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+}
+
+.confirm-personal-data-modal__icon-image {
+  width: 56px;
+  height: 56px;
+  display: block;
+}
+
+.confirm-personal-data-modal__title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 800;
+  font-family: Santander Headline, Santander Micro Text, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.confirm-personal-data-modal__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--confirm-muted);
+}
+
+.confirm-personal-data-modal__card {
+  width: 100%;
+  border: 1px solid var(--confirm-border);
+  border-radius: 14px;
+  padding: 16px 16px 12px;
+  text-align: left;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+.confirm-personal-data-modal__card-title {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.confirm-personal-data-modal__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.confirm-personal-data-modal__item {
+  margin: 0;
+}
+
+.confirm-personal-data-modal__label {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--confirm-muted);
+  font-weight: 700;
+}
+
+.confirm-personal-data-modal__value {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.confirm-personal-data-modal__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.confirm-personal-data-modal__actions std-button {
+  width: 100%;
+}
+
+/* std-link already uses the design system alternative color (#127277) for type="default". */
+.confirm-personal-data-modal__actions std-link {
+  width: 100%;
+}
+

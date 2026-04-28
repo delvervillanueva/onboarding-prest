@@ -205,27 +205,49 @@
   height: 54px;
 }
 
-.personal-data-page__modal-body {
+.personal-data-page__pep-info-modal {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding-bottom: 8px;
+  gap: 12px;
+  padding: 6px 2px 8px;
+  color: var(--personal-data-text);
 }
 
-.personal-data-page__modal-title {
+.personal-data-page__pep-info-close {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--personal-data-text);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.personal-data-page__pep-info-close:focus-visible {
+  outline: 3px solid rgba(19, 116, 228, 0.35);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.personal-data-page__pep-info-title {
   margin: 0;
-  font-size: 18px;
+  padding-right: 36px;
+  font-size: 20px;
+  line-height: 1.2;
   font-weight: 800;
+  font-family: Santander Headline, Santander Micro Text, Roboto, Helvetica, Arial, sans-serif;
 }
 
-.personal-data-page__modal-text {
+.personal-data-page__pep-info-text {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.5;
   color: var(--personal-data-muted);
-}
-
-.personal-data-page__modal-body std-button {
-  width: 100%;
-  margin-top: 8px;
 }

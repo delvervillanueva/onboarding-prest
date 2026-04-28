@@ -68,9 +68,17 @@
         "pepInfoAria": "Información sobre Persona Políticamente Expuesta"
       },
       "pepModal": {
-        "title": "Persona Políticamente Expuesta (PEP)",
-        "body": "Una PEP es quien desempeña o ha desempeñado funciones públicas destacadas. Esta información nos ayuda a cumplir con la normativa aplicable.",
+        "title": "¿Qué es una Persona Políticamente Expuesta (PEP)?",
+        "body": "Son las personas naturales, nacionales o extranjeras, que cumplen o que en los últimos cinco (5) años han cumplido funciones públicas destacadas o funciones prominentes en una organización internacional, sea en el territorio nacional o extranjero",
         "close": "Entendido"
+      },
+      "confirmModal": {
+        "aria": "Confirmación de datos",
+        "title": "Antes de continuar",
+        "body": "Revisa que tus datos sean correctos. La información para visualizar tu oferta será enviada a tu correo y celular.",
+        "cardTitle": "Datos ingresados",
+        "ctaConfirm": "Mis datos son correctos",
+        "ctaEdit": "Necesito corregir mis datos"
       },
       "consent": {
         "part1": "Autorizo el tratamiento de mis datos personales para",

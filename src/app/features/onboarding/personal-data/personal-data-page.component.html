@@ -184,7 +184,7 @@
         size="l"
         [attr.label]="ctaContinue()"
         [disabled]="form.invalid"
-        (clickEvent)="submitFromButton()"
+        (clickEvent)="openConfirmPersonalDataModal()"
       ></std-button>
     </footer>
   </form>
@@ -192,18 +192,39 @@
   <std-modal-native
     [show]="pepModalOpen()"
     size="s"
+    [noHeader]="true"
     [noFooter]="true"
     (iconClick)="closePepModal()"
+    (click)="closeOnBackdropClick($event, 'pep')"
   >
-    <div class="personal-data-page__modal-body">
-      <h2 class="personal-data-page__modal-title">{{ pepModalTitle() }}</h2>
-      <p class="personal-data-page__modal-text">{{ pepModalBody() }}</p>
-      <std-button
-        type="primary"
-        size="l"
-        [attr.label]="pepModalClose()"
-        (clickEvent)="closePepModal()"
-      ></std-button>
+    <div class="personal-data-page__pep-info-modal">
+      <button
+        type="button"
+        class="personal-data-page__pep-info-close"
+        aria-label="Cerrar"
+        (click)="closePepModal()"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+
+      <h2 class="personal-data-page__pep-info-title">{{ pepModalTitle() }}</h2>
+      <p class="personal-data-page__pep-info-text">{{ pepModalBody() }}</p>
     </div>
+  </std-modal-native>
+
+  <std-modal-native
+    [show]="confirmPersonalDataModalOpen()"
+    size="s"
+    [noFooter]="true"
+    (iconClick)="closeConfirmPersonalDataModal()"
+    (click)="closeOnBackdropClick($event, 'confirm')"
+  >
+    <app-confirm-personal-data-modal
+      [documentNumber]="form.controls.documentNumber.value"
+      [email]="form.controls.email.value"
+      [phoneNumber]="form.controls.phoneNumber.value"
+      (confirm)="confirmPersonalData()"
+      (edit)="editPersonalData()"
+    ></app-confirm-personal-data-modal>
   </std-modal-native>
 </main>

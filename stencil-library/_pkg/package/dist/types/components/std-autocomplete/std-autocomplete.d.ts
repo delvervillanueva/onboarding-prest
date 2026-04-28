@@ -1,0 +1,35 @@
+import { EventEmitter } from '../../stencil-public-runtime';
+export declare class StdAutoComplete {
+    label: string;
+    suggestions: any[];
+    icon: string;
+    displayProp: string;
+    valueProp: string;
+    altDisplayProp: string;
+    altDisplayFn: Function;
+    placeholder: string;
+    maxLength: number;
+    minLength: number;
+    disabled: boolean;
+    readonly: boolean;
+    cacheItems: boolean;
+    interactiveState: null | 'loading' | 'error' | 'void';
+    disabledAsReadonly: boolean;
+    helperText: string;
+    status: string;
+    changeEvent: EventEmitter<string>;
+    selectedEvent: EventEmitter<any>;
+    blurEvent: EventEmitter;
+    selectedItem: any | null;
+    isVisible: boolean;
+    inputValue: string;
+    inputElement: HTMLDivElement;
+    setSelectedValue(selectedItem: any): Promise<void>;
+    private handleInputChange;
+    private displayText;
+    private altDisplayText;
+    toggleVisible(): void;
+    onInputBlur(selectedItem: any | null): void;
+    checkForClickOutside(ev: PointerEvent): void;
+    render(): any;
+}

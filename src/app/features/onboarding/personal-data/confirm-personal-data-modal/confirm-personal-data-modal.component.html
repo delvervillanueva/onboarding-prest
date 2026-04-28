@@ -1,0 +1,51 @@
+<div class="confirm-personal-data-modal" role="dialog" [attr.aria-label]="ariaLabel()">
+  <div class="confirm-personal-data-modal__icon" aria-hidden="true">
+    <img
+      class="confirm-personal-data-modal__icon-image"
+      src="/assets/images/welcome/Icon.svg"
+      alt=""
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <h2 class="confirm-personal-data-modal__title">{{ title() }}</h2>
+  <p class="confirm-personal-data-modal__text">
+    {{ body() }}
+  </p>
+
+  <section class="confirm-personal-data-modal__card" [attr.aria-label]="cardTitle()">
+    <h3 class="confirm-personal-data-modal__card-title">{{ cardTitle() }}</h3>
+
+    <dl class="confirm-personal-data-modal__list">
+      <div class="confirm-personal-data-modal__item">
+        <dt class="confirm-personal-data-modal__label">{{ labelDni() }}</dt>
+        <dd class="confirm-personal-data-modal__value">{{ documentNumber() }}</dd>
+      </div>
+      <div class="confirm-personal-data-modal__item">
+        <dt class="confirm-personal-data-modal__label">{{ labelEmail() }}</dt>
+        <dd class="confirm-personal-data-modal__value">{{ email() }}</dd>
+      </div>
+      <div class="confirm-personal-data-modal__item">
+        <dt class="confirm-personal-data-modal__label">{{ labelPhone() }}</dt>
+        <dd class="confirm-personal-data-modal__value">{{ phoneNumber() }}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <div class="confirm-personal-data-modal__actions">
+    <std-button
+      type="primary"
+      size="l"
+      [attr.label]="ctaConfirm()"
+      (clickEvent)="confirm.emit()"
+    ></std-button>
+
+    <std-link
+      type="default"
+      [attr.label]="ctaEdit()"
+      (clickEvent)="edit.emit()"
+    ></std-link>
+  </div>
+</div>
+
