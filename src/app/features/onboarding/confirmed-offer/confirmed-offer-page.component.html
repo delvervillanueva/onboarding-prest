@@ -9,24 +9,32 @@
     />
   </header>
 
-  <section class="confirmed-offer__content">
-    <div class="confirmed-offer__illustration-wrap" aria-hidden="true">
-      <img
-        class="confirmed-offer__illustration"
-        src="/assets/images/welcome/illustration.svg"
-        [attr.alt]="illustrationAlt()"
-        loading="eager"
-        decoding="async"
-      />
-    </div>
+  <div class="confirmed-offer__body">
+    <section class="confirmed-offer__content">
+      <div class="confirmed-offer__illustration-wrap" aria-hidden="true">
+        <img
+          class="confirmed-offer__illustration"
+          src="/assets/images/welcome/illustration.svg"
+          [attr.alt]="illustrationAlt()"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
 
-    <h1 class="confirmed-offer__title">
-      {{ titlePrefix() }} <span class="confirmed-offer__title-accent">{{ titleAccent() }}</span>
-    </h1>
+      <div class="confirmed-offer__text-block">
+        <h1 class="confirmed-offer__title">
+          <span class="confirmed-offer__title-line">
+            {{ titleLine1Prefix() }}<span class="confirmed-offer__title-accent">{{ titleLine1Accent() }}</span>
+          </span>
+          <span class="confirmed-offer__title-line confirmed-offer__title-line--accent">{{ titleLine2() }}</span>
+        </h1>
 
-    <p class="confirmed-offer__description">{{ description() }}</p>
-  </section>
+        <p class="confirmed-offer__description">{{ description() }}</p>
+      </div>
+    </section>
+  </div>
 
+  <!-- Figma Frame 48097573: panel blanco (≈80px hug) con padding 16 + botón + franja 16 inferior (safe-area en el mismo bloque). -->
   <footer class="confirmed-offer__footer">
     <std-button
       class="confirmed-offer__cta"

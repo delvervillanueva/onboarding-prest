@@ -13,8 +13,9 @@ export class ConfirmedOfferPageComponent {
   readonly text = inject(TextService);
 
   readonly ariaPage = this.text.getTextSignal('onboarding.confirmedOffer.aria.page');
-  readonly titlePrefix = this.text.getTextSignal('onboarding.confirmedOffer.title.prefix');
-  readonly titleAccent = this.text.getTextSignal('onboarding.confirmedOffer.title.accent');
+  readonly titleLine1Prefix = this.text.getTextSignal('onboarding.confirmedOffer.title.line1Prefix');
+  readonly titleLine1Accent = this.text.getTextSignal('onboarding.confirmedOffer.title.line1Accent');
+  readonly titleLine2 = this.text.getTextSignal('onboarding.confirmedOffer.title.line2');
   readonly description = this.text.getTextSignal('onboarding.confirmedOffer.description');
   readonly ctaStart = this.text.getTextSignal('onboarding.confirmedOffer.cta.start');
   readonly illustrationAlt = this.text.getTextSignal('onboarding.confirmedOffer.illustration.alt');

@@ -1,20 +1,44 @@
+/* Marco blanco (desktop: laterales + franja inferior); la tinta #F5F9FB va solo en la columna de contenido. */
+:host {
+  --confirmed-offer-surface: #f5f9fb;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
+  background: #ffffff;
+}
+
 .confirmed-offer {
+  /* Flame spacing-06 ≈ 24px, spacing-03 ≈ 12px (text block inner gap) */
+  --confirmed-offer-space-03: 12px;
+  --confirmed-offer-space-06: 24px;
+  /* Figma: elipse contenedora 159×159; ilustración interior 120×120 */
+  --confirmed-offer-ellipse-size: 159px;
+  --confirmed-offer-illustration-size: 120px;
   --confirmed-offer-red: #ec0000;
   --confirmed-offer-text: #222222;
   --confirmed-offer-muted: #5c6670;
-  --confirmed-offer-bg: #f4f7f8;
+  /* Columna tipo móvil en escritorio (evita #F5F9FB a pantalla completa). */
+  --confirmed-offer-column-max: 420px;
 
-  min-height: 100dvh;
+  margin: 0;
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  background: var(--confirmed-offer-bg);
+  background: #ffffff;
   color: var(--confirmed-offer-text);
 }
 
 .confirmed-offer__header {
+  flex-shrink: 0;
   display: flex;
   justify-content: flex-end;
-  padding: 18px 16px 8px;
+  align-items: center;
+  padding: 16px var(--confirmed-offer-space-06) 16px;
+  background: #ffffff;
 }
 
 .confirmed-offer__logo {
@@ -23,13 +47,26 @@
   display: block;
 }
 
+.confirmed-offer__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  max-width: var(--confirmed-offer-column-max);
+  margin-inline: auto;
+  background: var(--confirmed-offer-surface);
+}
+
 .confirmed-offer__content {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 12px 20px 24px;
+  padding: 16px var(--confirmed-offer-space-06);
+  gap: var(--confirmed-offer-space-06);
   max-width: 420px;
   width: 100%;
   margin: 0 auto;
@@ -37,33 +74,53 @@
 }
 
 .confirmed-offer__illustration-wrap {
-  width: 200px;
-  height: 200px;
+  width: var(--confirmed-offer-ellipse-size);
+  height: var(--confirmed-offer-ellipse-size);
   border-radius: 50%;
   background: #ffffff;
   display: grid;
   place-items: center;
-  margin-bottom: 24px;
+  flex-shrink: 0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .confirmed-offer__illustration {
-  width: 140px;
-  height: auto;
-  max-height: 160px;
+  width: var(--confirmed-offer-illustration-size);
+  height: var(--confirmed-offer-illustration-size);
   object-fit: contain;
   display: block;
 }
 
+.confirmed-offer__text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--confirmed-offer-space-03);
+  width: 100%;
+  max-width: 312px;
+}
+
 .confirmed-offer__title {
-  margin: 0 0 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--confirmed-offer-space-03);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 800;
   letter-spacing: -0.3px;
 }
 
+.confirmed-offer__title-line {
+  display: block;
+}
+
 .confirmed-offer__title-accent {
+  color: var(--confirmed-offer-red);
+}
+
+.confirmed-offer__title-line--accent {
   color: var(--confirmed-offer-red);
 }
 
@@ -71,15 +128,24 @@
   margin: 0;
   font-size: 15px;
   line-height: 1.45;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--confirmed-offer-muted);
-  max-width: 340px;
 }
 
+/* Misma anchura que la columna #F5F9FB; fondo blanco incluye el botón y los 16px bajo él (Figma). */
 .confirmed-offer__footer {
-  padding: 16px 20px 28px;
+  --confirmed-offer-cta-panel-pad: 16px;
+
+  flex-shrink: 0;
+  width: 100%;
+  max-width: var(--confirmed-offer-column-max);
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: var(--confirmed-offer-cta-panel-pad) var(--confirmed-offer-cta-panel-pad)
+    calc(var(--confirmed-offer-cta-panel-pad) + env(safe-area-inset-bottom, 0px));
   display: flex;
   justify-content: center;
+  background: #ffffff;
 }
 
 .confirmed-offer__cta {
