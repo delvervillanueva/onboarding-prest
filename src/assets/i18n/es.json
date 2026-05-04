@@ -52,7 +52,7 @@
           "placeholder": "usuario@correo.com"
         },
         "promoter": {
-          "label": "Código del promotor",
+          "label": "Código del promotor (Opcional)",
           "placeholder": "985764",
           "helper": "Escribe aquí el código del promotor Santander Consumer que estará contigo en este proceso."
         }
@@ -95,7 +95,7 @@
         "email": "Ingresa un correo electrónico válido.",
         "yesNo": "Selecciona una opción.",
         "policy": "Debes autorizar el tratamiento de datos para continuar.",
-        "captcha": "Completa la verificación para continuar."
+        "captcha": "Please verify that you are not a robot"
       }
     },
     "confirmedOffer": {
@@ -113,6 +113,46 @@
       },
       "illustration": {
         "alt": "Oferta disponible"
+      }
+    },
+    "noOffer": {
+      "aria": {
+        "page": "Sin oferta disponible"
+      },
+      "greeting": {
+        "withName": "{{userName}},",
+        "fallback": "Hola,"
+      },
+      "headline": "En este momento no tenemos una oferta para ti",
+      "body": {
+        "primary": "Revisamos tu información y hoy no encontramos un producto que se ajuste a lo que necesitas.",
+        "secondary": "Vuelve a intentarlo en unos días."
+      },
+      "cta": {
+        "back": "Volver"
+      },
+      "illustration": {
+        "alt": "Sin oferta en este momento"
+      }
+    },
+    "additionalInfoRequired": {
+      "aria": {
+        "page": "Información adicional necesaria"
+      },
+      "greeting": {
+        "withName": "{{userName}},",
+        "fallback": "Hola,"
+      },
+      "headline": "En este momento no podemos atenderte por este medio",
+      "body": "Necesitamos pedirte algunos documentos e información adicional para poder abrir tu cuenta.",
+      "agencyLink": {
+        "label": "Encuentra tu agencia más cercana >"
+      },
+      "cta": {
+        "back": "Volver"
+      },
+      "illustration": {
+        "alt": "Revisión de documentos en agencia"
       }
     }
   }

@@ -171,10 +171,17 @@
     </div>
 
     <div class="personal-data-page__captcha">
-      <div #recaptchaContainer class="personal-data-page__recaptcha-host"></div>
-      @if (form.controls.captchaResponse.invalid && form.controls.captchaResponse.touched) {
-        <p class="personal-data-page__error" role="alert">{{ errorCaptcha() }}</p>
-      }
+      <div
+        class="personal-data-page__captcha-field"
+        [class.personal-data-page__captcha-field--error]="captchaHasError()"
+      >
+        <div #recaptchaContainer class="personal-data-page__recaptcha-host"></div>
+        @if (captchaHasError()) {
+          <p class="personal-data-page__error personal-data-page__error--captcha" role="alert">
+            {{ errorCaptcha() }}
+          </p>
+        }
+      </div>
     </div>
 
     <footer class="personal-data-page__footer">
@@ -183,7 +190,6 @@
         type="primary"
         size="l"
         [attr.label]="ctaContinue()"
-        [disabled]="form.invalid"
         (clickEvent)="openConfirmPersonalDataModal()"
       ></std-button>
     </footer>

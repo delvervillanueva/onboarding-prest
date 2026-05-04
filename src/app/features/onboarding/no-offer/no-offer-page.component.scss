@@ -1,0 +1,141 @@
+:host {
+  /* Figma Frame 48097571: fondo size/spacing surface #F5F9FB */
+  --no-offer-surface: #f5f9fb;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
+  background: #ffffff;
+}
+
+.no-offer {
+  --no-offer-space-03: 12px;
+  --no-offer-space-04: 16px;
+  --no-offer-space-06: 24px;
+  --no-offer-illustration-size: 120px;
+  --no-offer-red: #ec0000;
+  --no-offer-text: #222222;
+  --no-offer-muted: #5c6670;
+  --no-offer-column-max: 420px;
+
+  margin: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  color: var(--no-offer-text);
+}
+
+.no-offer__header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px var(--no-offer-space-06) 16px;
+  background: #ffffff;
+}
+
+.no-offer__logo {
+  width: 124px;
+  height: auto;
+  display: block;
+}
+
+.no-offer__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  max-width: var(--no-offer-column-max);
+  margin-inline: auto;
+  background: var(--no-offer-surface);
+}
+
+/* Figma: flujo vertical, padding size/spacing-04, gap size/spacing-06, bloque arriba (no centrado). */
+.no-offer__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: var(--no-offer-space-04) var(--no-offer-space-06) var(--no-offer-space-04);
+  gap: var(--no-offer-space-06);
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.no-offer__illustration {
+  width: var(--no-offer-illustration-size);
+  height: var(--no-offer-illustration-size);
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.no-offer__text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--no-offer-space-03);
+  width: 100%;
+  max-width: 312px;
+}
+
+.no-offer__greeting {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--no-offer-text);
+}
+
+.no-offer__headline {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--no-offer-red);
+}
+
+.no-offer__description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--no-offer-muted);
+}
+
+.no-offer__footer {
+  --no-offer-cta-panel-pad: 16px;
+
+  flex-shrink: 0;
+  width: 100%;
+  max-width: var(--no-offer-column-max);
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: var(--no-offer-cta-panel-pad) var(--no-offer-cta-panel-pad)
+    calc(var(--no-offer-cta-panel-pad) + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.no-offer__cta {
+  width: 100%;
+  max-width: 360px;
+  height: 54px;
+}
+
+.no-offer__cta:focus-visible {
+  outline: 3px solid rgba(236, 0, 0, 0.35);
+  outline-offset: 3px;
+}

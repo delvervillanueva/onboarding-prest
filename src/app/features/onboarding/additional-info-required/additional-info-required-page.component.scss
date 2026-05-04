@@ -1,0 +1,170 @@
+:host {
+  /* Alineado con no-offer / Figma: panel #F5F9FB */
+  --additional-info-required-surface: #f5f9fb;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
+  background: #ffffff;
+}
+
+.additional-info-required {
+  --additional-info-required-space-03: 12px;
+  --additional-info-required-space-04: 16px;
+  --additional-info-required-space-06: 24px;
+  --additional-info-required-illustration-size: 120px;
+  --additional-info-required-red: #ec0000;
+  --additional-info-required-text: #222222;
+  --additional-info-required-muted: #5c6670;
+  --additional-info-required-link: #007782;
+  --additional-info-required-column-max: 420px;
+
+  margin: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  color: var(--additional-info-required-text);
+}
+
+.additional-info-required__header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px var(--additional-info-required-space-06) 16px;
+  background: #ffffff;
+}
+
+.additional-info-required__logo {
+  width: 124px;
+  height: auto;
+  display: block;
+}
+
+.additional-info-required__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  max-width: var(--additional-info-required-column-max);
+  margin-inline: auto;
+  background: var(--additional-info-required-surface);
+}
+
+.additional-info-required__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: var(--additional-info-required-space-04) var(--additional-info-required-space-06)
+    var(--additional-info-required-space-04);
+  gap: var(--additional-info-required-space-06);
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.additional-info-required__illustration {
+  width: var(--additional-info-required-illustration-size);
+  height: var(--additional-info-required-illustration-size);
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.additional-info-required__text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--additional-info-required-space-03);
+  width: 100%;
+  max-width: 312px;
+}
+
+.additional-info-required__greeting {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--additional-info-required-text);
+}
+
+.additional-info-required__headline {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--additional-info-required-red);
+}
+
+.additional-info-required__description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--additional-info-required-muted);
+}
+
+.additional-info-required__agency-link {
+  margin: 4px 0 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--additional-info-required-link);
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.additional-info-required__agency-link:hover,
+.additional-info-required__agency-link:active,
+.additional-info-required__agency-link:visited {
+  color: var(--additional-info-required-link);
+  text-decoration: none;
+}
+
+.additional-info-required__agency-link:focus-visible {
+  outline: 3px solid rgba(0, 119, 130, 0.35);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.additional-info-required__footer {
+  --additional-info-required-cta-panel-pad: 16px;
+
+  flex-shrink: 0;
+  width: 100%;
+  max-width: var(--additional-info-required-column-max);
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: var(--additional-info-required-cta-panel-pad) var(--additional-info-required-cta-panel-pad)
+    calc(var(--additional-info-required-cta-panel-pad) + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.additional-info-required__cta {
+  width: 100%;
+  max-width: 360px;
+  height: 54px;
+}
+
+.additional-info-required__cta:focus-visible {
+  outline: 3px solid rgba(236, 0, 0, 0.35);
+  outline-offset: 3px;
+}

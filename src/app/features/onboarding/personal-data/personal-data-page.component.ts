@@ -112,6 +112,12 @@ export class PersonalDataPageComponent implements OnDestroy {
   readonly errorYesNo = this.text.getTextSignal('onboarding.personalData.errors.yesNo');
   readonly errorPolicy = this.text.getTextSignal('onboarding.personalData.errors.policy');
   readonly errorCaptcha = this.text.getTextSignal('onboarding.personalData.errors.captcha');
+  /** Show reCAPTCHA error styling only after the user clicks Continue. */
+  readonly submitAttempted = signal(false);
+  readonly captchaHasError = computed(() => {
+    const c = this.form.controls.captchaResponse;
+    return this.submitAttempted() && c.invalid;
+  });
 
   constructor() {
     this.form.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.cdr.markForCheck());
@@ -171,6 +177,13 @@ export class PersonalDataPageComponent implements OnDestroy {
   }
 
   openConfirmPersonalDataModal(): void {
+    // reCAPTCHA is mandatory: mark as touched on CTA click and block modal when invalid.
+    this.submitAttempted.set(true);
+    this.form.markAllAsTouched();
+    this.cdr.markForCheck();
+    if (this.form.invalid) {
+      return;
+    }
     this.pepModalOpen.set(false);
     this.confirmPersonalDataModalOpen.set(true);
     this.cdr.markForCheck();

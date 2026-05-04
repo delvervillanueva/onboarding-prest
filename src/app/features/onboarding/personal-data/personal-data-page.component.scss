@@ -184,13 +184,29 @@
 
 .personal-data-page__captcha {
   margin-top: 20px;
+}
+
+.personal-data-page__captcha-field {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  box-sizing: border-box;
+}
+
+.personal-data-page__captcha-field--error {
+  border: 2px solid var(--personal-data-red);
+  border-radius: 4px;
+  padding: 8px;
+  background: #ffffff;
 }
 
 .personal-data-page__recaptcha-host {
   min-height: 78px;
+}
+
+.personal-data-page__error--captcha {
+  text-align: center;
+  padding-bottom: 2px;
 }
 
 .personal-data-page__footer {

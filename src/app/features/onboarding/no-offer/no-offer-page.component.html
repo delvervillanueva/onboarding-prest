@@ -1,0 +1,40 @@
+<main class="no-offer" [attr.aria-label]="ariaPage()">
+  <header class="no-offer__header">
+    <img
+      class="no-offer__logo"
+      src="/assets/images/welcome/LogoSantander.svg"
+      alt=""
+      loading="eager"
+      decoding="async"
+    />
+  </header>
+
+  <div class="no-offer__body">
+    <section class="no-offer__content">
+      <img
+        class="no-offer__illustration"
+        src="/assets/images/welcome/no-offer-briefcase.svg"
+        [attr.alt]="illustrationAlt()"
+        loading="eager"
+        decoding="async"
+      />
+
+      <div class="no-offer__text-block">
+        <p class="no-offer__greeting">{{ greetingLine() }}</p>
+        <h1 class="no-offer__headline">{{ headline() }}</h1>
+        <p class="no-offer__description">{{ bodyPrimary() }}</p>
+        <p class="no-offer__description">{{ bodySecondary() }}</p>
+      </div>
+    </section>
+  </div>
+
+  <footer class="no-offer__footer">
+    <std-button
+      class="no-offer__cta"
+      type="primary"
+      size="l"
+      [attr.label]="ctaBack()"
+      (clickEvent)="goBack()"
+    ></std-button>
+  </footer>
+</main>

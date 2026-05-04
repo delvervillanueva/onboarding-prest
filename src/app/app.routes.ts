@@ -23,6 +23,18 @@ export const routes: Routes = [
           import('./features/onboarding/confirmed-offer/confirmed-offer-page.component').then(
             (m) => m.ConfirmedOfferPageComponent
           )
+      },
+      {
+        path: 'no-offer',
+        loadComponent: () =>
+          import('./features/onboarding/no-offer/no-offer-page.component').then((m) => m.NoOfferPageComponent)
+      },
+      {
+        path: 'additional-info-required',
+        loadComponent: () =>
+          import('./features/onboarding/additional-info-required/additional-info-required-page.component').then(
+            (m) => m.AdditionalInfoRequiredPageComponent
+          )
       }
     ]
   },

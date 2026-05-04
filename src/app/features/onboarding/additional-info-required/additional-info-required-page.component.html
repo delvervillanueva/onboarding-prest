@@ -1,0 +1,48 @@
+<main class="additional-info-required" [attr.aria-label]="ariaPage()">
+  <header class="additional-info-required__header">
+    <img
+      class="additional-info-required__logo"
+      src="/assets/images/welcome/LogoSantander.svg"
+      alt=""
+      loading="eager"
+      decoding="async"
+    />
+  </header>
+
+  <div class="additional-info-required__body">
+    <section class="additional-info-required__content">
+      <img
+        class="additional-info-required__illustration"
+        src="/assets/images/welcome/no-offer-briefcase.svg"
+        [attr.alt]="illustrationAlt()"
+        loading="eager"
+        decoding="async"
+      />
+
+      <div class="additional-info-required__text-block">
+        <p class="additional-info-required__greeting">{{ greetingLine() }}</p>
+        <h1 class="additional-info-required__headline">{{ headline() }}</h1>
+        <p class="additional-info-required__description">{{ body() }}</p>
+        <a
+          class="additional-info-required__agency-link"
+          [href]="agencyFinderHref() || '#'"
+          [attr.target]="agencyFinderHref() ? '_blank' : null"
+          [attr.rel]="agencyFinderHref() ? 'noopener noreferrer' : null"
+          (click)="onAgencyFinderClick($event)"
+        >
+          {{ agencyLinkLabel() }}
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <footer class="additional-info-required__footer">
+    <std-button
+      class="additional-info-required__cta"
+      type="primary"
+      size="l"
+      [attr.label]="ctaBack()"
+      (clickEvent)="goBack()"
+    ></std-button>
+  </footer>
+</main>
